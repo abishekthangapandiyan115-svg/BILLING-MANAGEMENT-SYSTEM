@@ -1,0 +1,62 @@
+#include <stdio.h>
+
+int main() { int n, i, choice; float total = 0;
+
+printf("Enter number of products to buy: ");
+scanf("%d", &n);
+
+// Product list
+char productList[5][20] = {"Pen", "Book", "Bag", "Pencil", "Notebook"};
+float productPrice[5] = {10.0, 50.0, 500.0, 5.0, 80.0};
+
+int selected[n], count[n];
+float amount[n];
+
+for(i = 0; i < n; i++) {
+
+    printf("\nAvailable Products:\n");
+    printf("1. Pen - 10\n");
+    printf("2. Book - 50\n");
+    printf("3. Bag - 500\n");
+    printf("4. Pencil - 5\n");
+    printf("5. Notebook - 80\n");
+
+    printf("Choose product (1-5): ");
+    scanf("%d", &choice);
+
+    if(choice < 1 || choice > 5) {
+        printf("Invalid choice! Try again.\n");
+        i--;
+        continue;
+    }
+
+    selected[i] = choice - 1;
+
+    printf("Enter quantity: ");
+    scanf("%d", &count[i]);
+
+    amount[i] = count[i] * productPrice[selected[i]];
+    total += amount[i];
+}
+
+// Bill Output
+printf("\n\n=========== BILL ===========\n");
+printf("-------------------------------------------------\n");
+printf("S.No\tProduct\t\tPrice\tQty\tAmount\n");
+printf("-------------------------------------------------\n");
+
+for(i = 0; i < n; i++) {
+    printf("%d\t%-10s\t%.2f\t%d\t%.2f\n",
+           i+1,
+           productList[selected[i]],
+           productPrice[selected[i]],
+           count[i],
+           amount[i]);
+}
+
+printf("-------------------------------------------------\n");
+printf("Total Amount = %.2f\n", total);
+printf("===============================================\n");
+
+return 0;
+}
